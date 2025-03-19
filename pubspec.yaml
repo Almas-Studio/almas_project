@@ -1,0 +1,37 @@
+name: almas_project
+description: "A project structure to use for fast flutter project development"
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: ^3.7.0
+  flutter: ">=1.17.0"
+
+scripts:
+  build: dart run build_runner build --delete-conflicting-outputs
+
+dependencies:
+  cross_file: ^0.3.4+2
+  dio: ^5.8.0+1
+  encrypt: ^5.0.3
+  flutter:
+    sdk: flutter
+  flutter_secure_storage_x: ^10.2.2
+  go_router: ^14.8.1
+  hash: ^1.0.4
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  http_parser: ^4.1.2
+  json_annotation: ^4.9.0
+  package_info_plus: ^8.3.0
+  permission_handler: ^11.4.0
+  prefman: ^1.2.0
+  url_launcher: ^6.3.1
+  uuid: ^4.5.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.15
+  json_serializable: ^6.9.4
