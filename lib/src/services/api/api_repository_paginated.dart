@@ -88,8 +88,11 @@ abstract class PaginatedRepository<T extends Jsonable, P>
           }
         }
       }
-    } catch (e) {
-      log('pagination_service: $e');
+    } catch (e, s) {
+      if(e.toString().contains("Map<String, dynamic>")){
+        throw Error();
+      }
+      log('PaginatedRepository: $e');
       hasError.value = true;
     } finally {
       fetching.value = false;
