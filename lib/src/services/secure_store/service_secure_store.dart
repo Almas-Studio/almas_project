@@ -26,7 +26,7 @@ class SecureStoreService extends AppService {
     final dataKey = _generateSecureStoreKey(appKey, [15, 32, 45, 87]);
 
     _keyEncrypter = Encrypter(AES(Key.fromUtf8(appKey), mode: AESMode.ecb));
-    _boxEncryption = Config().encryption ? HiveAesCipher(dataKey) : null;
+    _boxEncryption = Config.get().encryption ? HiveAesCipher(dataKey) : null;
 
     PrefMan.setDriver(HivePrefManDriver(await getBox('prefman')));
   }
@@ -56,7 +56,7 @@ class SecureStoreService extends AppService {
     return SecureBox(
       store: box,
       keyEncryptor: _keyEncrypter,
-      encryptKeys: encrypted && Config().encryption,
+      encryptKeys: encrypted && Config.get().encryption,
     );
   }
 

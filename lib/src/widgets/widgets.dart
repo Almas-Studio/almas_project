@@ -5,3 +5,4 @@ export 'routing/routing.dart';
 export 'widget_access_govener.dart';
 export 'widget_call_once.dart';
 export 'widget_loading.dart';
+export 'theme/theme.dart';

@@ -1,3 +1,4 @@
+import 'package:almas_project/almas_project.dart';
 import 'package:flutter/material.dart';
 
 import '../../services/api/api_repository_paginated.dart';
@@ -32,7 +33,7 @@ class PaginationScrollView<T extends Jsonable, P> extends StatelessWidget {
       onRefresh: () => service.refresh(parameter),
       child: CustomScrollView(
         physics: AlwaysScrollableScrollPhysics(
-          parent: ScrollConfiguration.of(context).getScrollPhysics(context),
+          parent: AppTheme.of(context).getScrollPhysics(),
         ),
         slivers: [
           ...topSlivers,

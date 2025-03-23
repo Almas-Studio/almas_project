@@ -60,5 +60,5 @@ class CacheService extends AppService implements SecureBox {
   Iterable<String> keys() => _box.keys();
 
   @override
-  bool get encryptKeys => Config().encryption;
+  bool get encryptKeys => Config.get().encryption;
 }

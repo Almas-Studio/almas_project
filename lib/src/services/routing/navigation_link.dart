@@ -5,5 +5,5 @@ mixin NavigationLink {
   String get navigationLink;
   Object? get navigationPayload => this;
 
-  Uri get resourceUri => Uri.parse(Config().deepLinkDomain).resolve(navigationLink);
+  Uri get resourceUri => Uri.parse(Config.get().deepLinkDomain).resolve(navigationLink);
 }
