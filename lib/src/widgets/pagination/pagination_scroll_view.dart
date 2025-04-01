@@ -1,8 +1,8 @@
-import 'package:almas_project/almas_project.dart';
 import 'package:flutter/material.dart';
 
 import '../../services/api/api_repository_paginated.dart';
 import '../../services/api/model_jsonable.dart';
+import '../theme/widget_theme_app.dart';
 import 'pagination_builder.dart';
 
 class PaginationScrollView<T extends Jsonable, P> extends StatelessWidget {

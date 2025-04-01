@@ -90,7 +90,7 @@ abstract class PaginatedRepository<T extends Jsonable, P>
       }
     } catch (e, s) {
       if(e.toString().contains("Map<String, dynamic>")){
-        throw Error();
+        throw Error(/*"Probably response type not registered in converter"*/);
       }
       log('PaginatedRepository: $e');
       hasError.value = true;
