@@ -78,7 +78,7 @@ class SecureStoreService extends AppService {
     final key = String.fromCharCodes(
         [101, 110, 99, 114, 121, 112, 116, 105, 111, 110, 95, 107, 101, 121]);
     const fss = FlutterSecureStorage(
-      aOptions: AndroidOptions(dataStore: true),
+      aOptions: AndroidOptions(encryptedSharedPreferences: true, dataStore: true),
     );
 
     if (await fss.containsKey(key: key)) {
