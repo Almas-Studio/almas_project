@@ -9,13 +9,11 @@ class PaginationScrollView<T extends Jsonable, P> extends StatelessWidget {
   final PaginatedRepository<T, P?> service;
   final P? parameter;
   final String? loadingMessage;
-  final Widget Function(
-    List<T> items,
-    VoidCallback loadNextPage,
-    bool hasMore,
-  ) builder;
+  final Widget Function(List<T> items, VoidCallback loadNextPage, bool hasMore)
+  builder;
   final List<Widget> topSlivers;
   final Widget? sliverEndTile;
+  final EdgeInsetsGeometry padding;
 
   const PaginationScrollView({
     super.key,
@@ -25,6 +23,12 @@ class PaginationScrollView<T extends Jsonable, P> extends StatelessWidget {
     this.loadingMessage,
     this.topSlivers = const [],
     this.sliverEndTile,
+    this.padding = const EdgeInsets.only(
+      top: 8,
+      left: 12,
+      right: 12,
+      bottom: 8,
+    ),
   });
 
   @override
@@ -38,12 +42,7 @@ class PaginationScrollView<T extends Jsonable, P> extends StatelessWidget {
         slivers: [
           ...topSlivers,
           SliverPadding(
-            padding: const EdgeInsets.only(
-              top: 8,
-              left: 12,
-              right: 12,
-              bottom: 8,
-            ),
+            padding: padding,
             sliver: PaginationBuilder<T, P>(
               service: service,
               parameter: parameter,
@@ -51,7 +50,7 @@ class PaginationScrollView<T extends Jsonable, P> extends StatelessWidget {
               loadingMessage: loadingMessage,
             ),
           ),
-          if(sliverEndTile != null) sliverEndTile!,
+          if (sliverEndTile != null) sliverEndTile!,
         ],
       ),
     );
