@@ -12,12 +12,17 @@ import 'pagination.dart';
 
 abstract class PaginatedRepository<T extends Jsonable, P>
     extends CachedRepository<T, P> with ChangeNotifier {
+  final bool autoRefresh;
+
   NextPage nextPage;
 
   PaginatedRepository({
     required super.cache,
     required this.nextPage,
+    this.autoRefresh = true,
   });
+
+  var _firstLoad = true;
 
   var _hasMore = true;
 
@@ -67,7 +72,12 @@ abstract class PaginatedRepository<T extends Jsonable, P>
         _reset();
       }
       if (nextPage.firstPage) {
-        restore(param);
+        final loadedCount = await restore(param);
+        if(loadedCount > 0 && _firstLoad){
+          _firstLoad = false;
+          return;
+        }
+        _firstLoad = false;
       }
       if (await shouldUpdateCache(param)) {
         if (hasMore) {
@@ -101,9 +111,11 @@ abstract class PaginatedRepository<T extends Jsonable, P>
   }
 
   // restore from Cache
-  Future<void> restore(P param) async {
+  Future<int> restore(P param) async {
+    var length = 0;
     try {
       final cacheData = await retrieveFromCache(param);
+      length = cacheData.length;
       if (cacheData.isNotEmpty) {
         _data
           ..clear()
@@ -111,6 +123,7 @@ abstract class PaginatedRepository<T extends Jsonable, P>
       }
     } catch (e) {}
     notifyListeners();
+    return length;
   }
 
   Future<void> refresh(P param) async {

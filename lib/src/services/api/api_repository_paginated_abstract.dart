@@ -6,12 +6,17 @@ import 'pagination.dart';
 import 'model_next_page.dart';
 
 class AbstractPaginationRepository<D extends Jsonable, P, C>
-    extends PaginatedRepository<D, P> implements ApiRepository<C> {
+    extends PaginatedRepository<D, P>
+    implements ApiRepository<C> {
   @override
   final C controller;
   final String Function(P p) keyBuilder;
   final Future<Response<Pagination<D>>> Function(
-      C controller, P param, NextPage page) onRequest;
+    C controller,
+    P param,
+    NextPage page,
+  )
+  onRequest;
   Future<bool> Function(C controller, P param, DateTime lastUpdate)?
   shouldRequest;
 
@@ -21,6 +26,7 @@ class AbstractPaginationRepository<D extends Jsonable, P, C>
     required this.onRequest,
     required this.keyBuilder,
     this.shouldRequest,
+    super.autoRefresh = true,
     super.nextPage = const NextPage.page(),
   });
 
