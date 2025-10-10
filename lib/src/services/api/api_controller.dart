@@ -39,7 +39,7 @@ abstract class ApiController {
     required String path,
     Map<String, dynamic> query = const {},
     required Map<String, dynamic> body,
-    bool retry = true,
+    bool retry = false,
   }) async {
     // convert files & remove nulls
     final transformedBody = <String, dynamic>{};
