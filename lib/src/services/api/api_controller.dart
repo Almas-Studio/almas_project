@@ -39,6 +39,7 @@ abstract class ApiController {
     required String path,
     Map<String, dynamic> query = const {},
     required Map<String, dynamic> body,
+    bool retry = true,
   }) async {
     // convert files & remove nulls
     final transformedBody = <String, dynamic>{};
@@ -58,6 +59,7 @@ abstract class ApiController {
     return await client.post<T>(
       base.path + path,
       options: Options(
+        extra: {'retry': retry},
         receiveTimeout: const Duration(minutes: 10),
         sendTimeout: const Duration(minutes: 10),
       ),
